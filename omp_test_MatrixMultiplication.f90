@@ -1,7 +1,7 @@
 program matrix_multiply
  
   use omp_lib
-  
+  ! A comment
   implicit none
   
   integer, parameter :: n = 80
