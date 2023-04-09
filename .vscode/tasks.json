@@ -1,0 +1,40 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "dependsOn": [
+                "make build dir",
+                "compile"
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind":"build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "make build dir",
+            "type": "shell",
+            "command": "if [ ! -d \"./build\" ]; then mkdir build; fi",
+        },
+        {
+            "label": "compile",
+            "type": "shell",
+            "command": "gfortran",
+            "args": [
+                "-Wall",
+                "-fopenmp",
+                "-g",
+                "-o",
+                "./build/omp_test_MatrixMultiplication",
+                "omp_test_MatrixMultiplication.f90",
+            ],
+        },
+        {
+            "label": "make",
+            "type": "shell",
+            "command": "make",
+        }
+    ]
+}

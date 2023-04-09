@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name":"Run gdb",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/omp_test_MatrixMultiplication",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceRoot}",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "build",
+        }
+    ]
+}

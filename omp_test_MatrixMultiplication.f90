@@ -9,7 +9,7 @@ program matrix_multiply
   
   real :: a(n,n,n), b(n,n,n), c(n,n,n)
   
-  real :: start_time, end_time, solve_time
+  real(8) :: start_time, end_time, solve_time
   
   ! Initialize matrices a and b
   do i = 1, n
@@ -28,7 +28,7 @@ program matrix_multiply
   start_time = omp_get_wtime()
   
   ! Perform matrix multiplication
-  !$OMP PARALLEL DO PRIVATE(i,j,k) SHARED(a,b,c)
+  !$OMP PARALLEL DO PRIVATE(i,j,k) SHARED(a,b,c) 
   do i = 1, n
     do j = 1, n
       do k = 1, n
