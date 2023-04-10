@@ -22,7 +22,7 @@ program matrix_multiply
   end do
   
   ! Set the number of threads 
-  call omp_set_num_threads(2)
+  call omp_set_num_threads(4)
   
   ! Start the timer
   start_time = omp_get_wtime()

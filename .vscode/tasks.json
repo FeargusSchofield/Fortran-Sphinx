@@ -5,7 +5,10 @@
             "label": "build",
             "dependsOn": [
                 "make build dir",
-                "compile"
+                "compile modules",
+                "compile main program",
+                "compile test program",
+                "link"
             ],
             "dependsOrder": "sequence",
             "group": {
@@ -19,22 +22,41 @@
             "command": "if [ ! -d \"./build\" ]; then mkdir build; fi",
         },
         {
-            "label": "compile",
+            "label": "compile modules",
             "type": "shell",
-            "command": "gfortran",
-            "args": [
-                "-Wall",
-                "-fopenmp",
-                "-g",
-                "-o",
-                "./build/omp_test_MatrixMultiplication",
-                "omp_test_MatrixMultiplication.f90",
-            ],
+            "command": "gfortran -c source/helloworld.f90 -o ./build/helloworld.o",
         },
         {
-            "label": "make",
+            "label": "compile main program",
             "type": "shell",
-            "command": "make",
-        }
+            "command": "gfortran -c source/mainprogram.f90 -o ./build/mainprogram.o",
+            "dependsOn": [
+                "compile modules"
+            ]
+        },
+        {
+            "label": "compile test program",
+            "type": "shell",
+            "command": "gfortran -c source/omp_test_MatrixMultiplication.f90 -o ./build/omp_test_MatrixMultiplication.o",
+        },
+        {
+            "label": "link",
+            "type": "shell",
+            "command": "gfortran -o ./build/program.exe ./build/helloworld.o ./build/mainprogram.o",
+            "dependsOn": [
+                "compile main program",
+                "compile test program"
+            ]
+        },
+        {
+            "label": "Generate Sphinx Documentation",
+            "type": "shell",
+            "command": "sphinx-build -b html docs docs/html",
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": []
+        },
     ]
 }
